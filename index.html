@@ -1,58 +1,331 @@
 <!doctype html>
-<html lang="en">
+<html lang="de-CH">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Phishing Awareness Check</title>
+    <title>GIVEAWAY – You Could Win!</title>
     <style>
-      :root {
-        color-scheme: light dark;
-      }
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
       body {
-        margin: 0;
         min-height: 100vh;
-        display: grid;
-        place-items: center;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: #0b1020;
-        color: #f7f9ff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+        background: radial-gradient(ellipse at 50% 0%, #2a004a 0%, #0d0010 60%);
+        color: #fff;
+        overflow-x: hidden;
       }
 
-      main {
-        max-width: 740px;
-        margin: 24px;
-        padding: 32px;
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+      .training-banner {
+        width: 100%;
+        background: repeating-linear-gradient(
+          135deg,
+          #ff3a00,
+          #ff3a00 18px,
+          #ffcc00 18px,
+          #ffcc00 36px
+        );
+        color: #000;
+        font-weight: 900;
+        font-size: 0.85rem;
+        letter-spacing: 0.08em;
+        text-align: center;
+        padding: 8px 12px;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        text-transform: uppercase;
       }
 
-      h1 {
-        margin-top: 0;
-        color: #ff7070;
+      .confetti-bar {
+        width: 100%;
+        height: 8px;
+        background: linear-gradient(90deg,
+          #ff0080, #ffcc00, #00e5ff, #a020f0,
+          #ff0080, #ffcc00, #00e5ff, #a020f0);
+        background-size: 200% 100%;
+        animation: shimmer 3s linear infinite;
+      }
+      @keyframes shimmer { to { background-position: 200% 0; } }
+
+      .page {
+        width: 100%;
+        max-width: 520px;
+        padding: 24px 16px 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0;
       }
 
-      p {
-        line-height: 1.5;
+      .hero { text-align: center; margin-bottom: 4px; }
+
+      .hero-title {
+        font-size: clamp(3.5rem, 18vw, 5.5rem);
+        font-weight: 900;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        background: linear-gradient(160deg, #ffe566 20%, #ffa800 50%, #ffe566 80%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        filter: drop-shadow(0 0 18px rgba(255,180,0,0.7));
+        line-height: 1;
+      }
+
+      .hero-sub {
+        display: inline-block;
+        margin-top: 6px;
+        background: linear-gradient(90deg, #d400a8, #6a00d4);
+        color: #fff;
+        font-size: clamp(1rem, 5vw, 1.4rem);
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 6px 22px;
+        border-radius: 4px;
+        font-style: italic;
+        box-shadow: 0 0 20px #d400a8aa;
+      }
+
+      .stars-row {
+        display: flex;
+        gap: 12px;
+        font-size: 1.6rem;
+        margin: 14px 0 8px;
+        filter: drop-shadow(0 0 8px #ffcc00);
+      }
+
+      .card {
+        width: 100%;
+        background: rgba(255,255,255,0.06);
+        border: 2px solid rgba(255, 150, 0, 0.45);
+        border-radius: 16px;
+        padding: 28px 24px 32px;
+        box-shadow:
+          0 0 0 4px rgba(255,60,220,0.15),
+          0 8px 40px rgba(0,0,0,0.6);
+      }
+
+      .card-title {
+        text-align: center;
+        font-size: 1.1rem;
+        color: #e0b8ff;
+        margin-bottom: 22px;
+        line-height: 1.4;
+      }
+
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin-bottom: 16px;
+      }
+
+      label {
+        font-size: 0.82rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: #e0c0ff;
+      }
+
+      .required-badge { color: #ff5fa0; margin-left: 3px; }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="tel"] {
+        width: 100%;
+        padding: 11px 14px;
+        border-radius: 8px;
+        border: 1.5px solid rgba(255,100,220,0.4);
+        background: rgba(0,0,0,0.45);
+        color: #fff;
+        font-size: 0.97rem;
+        outline: none;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      input:focus {
+        border-color: #e040fb;
+        box-shadow: 0 0 0 3px rgba(224,64,251,0.25);
+      }
+      input::placeholder { color: rgba(255,255,255,0.3); }
+
+      .or-divider {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin: 4px 0 16px;
+        color: rgba(255,255,255,0.4);
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+      .or-divider::before,
+      .or-divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: rgba(255,255,255,0.15);
+      }
+
+      .hint { font-size: 0.75rem; color: rgba(255,200,255,0.55); margin-top: 3px; }
+
+      .card-subtitle { opacity: 0.6; }
+
+      .btn-submit {
+        width: 100%;
+        margin-top: 8px;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        background: linear-gradient(135deg, #ffcc00, #ff8c00);
+        color: #1a0000;
+        font-size: 1.1rem;
+        font-weight: 900;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        cursor: pointer;
+        box-shadow: 0 0 20px rgba(255,180,0,0.6);
+        transition: transform 0.1s, box-shadow 0.2s;
+      }
+      .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 0 32px rgba(255,180,0,0.85);
+      }
+      .btn-submit:active { transform: translateY(0); }
+
+      .perks {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        margin-top: 28px;
+        gap: 8px;
+      }
+      .perk {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.7rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        text-align: center;
+        max-width: 110px;
+      }
+      .perk-icon { font-size: 1.8rem; line-height: 1; }
+      .perk-label { color: #ffd700; }
+      .perk-sub   { color: #ff79c6; }
+
+      .error-msg {
+        display: none;
+        background: rgba(255,60,60,0.15);
+        border: 1px solid #ff4444;
+        color: #ff9999;
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.85rem;
+        margin-top: 10px;
       }
     </style>
   </head>
   <body>
-    <main>
-      <h1>⚠️ Du hast einen Phishing QR-Code gescannt ⚠️</h1>
-      <p>
-        Diese Seite ist Teil einer Übung zur Sensibilisierung für Cybersicherheit. In der Realität kann das Scannen unbekannter
-        QR-Codes zu Phishing-Seiten, zu dem Herunterladen von Malware und dem Diebstahl von Zugangsdaten führen.
-      </p>
-      <p>
-        Überprüfe stets, von wem der Code stammt, schau dir die Ziel-URL genau an und gib keine
-        persönlichen Daten ein, es sei denn, du vertraust der Quelle.
-      </p>
-      <script>
-        fetch('https://api.counterapi.dev/v2/tobias-leus-team-3759/TecDay/up');
-      </script>
-    </main>
+
+    <div class="training-banner">
+      &#9888;&nbsp; Phishing-Awareness-Training – Simulation &nbsp;&#9888;
+    </div>
+    <div class="confetti-bar"></div>
+
+    <div class="page">
+
+      <div class="hero">
+        <div class="hero-title">Giveaway!</div>
+        <div class="hero-sub" lang="en">&#10024; You could win! &#10024;</div>
+      </div>
+
+      <div class="stars-row">&#11088;&#127873;&#11088;&#127873;&#11088;</div>
+
+      <div class="card">
+        <p class="card-title">
+          Trage dich jetzt ein und gewinne tolle Preise!<br>
+          <small class="card-subtitle">(Scan QR-Code &rarr; Formular ausf&uuml;llen &rarr; Gewinnchance sichern)</small>
+        </p>
+
+        <form id="giveaway-form" novalidate>
+
+          <div class="form-group">
+            <label for="f-name">Name</label>
+            <input type="text" id="f-name" name="name" placeholder="Dein Name" autocomplete="off" />
+          </div>
+
+          <div class="form-group">
+            <label for="f-email">
+              E-Mail-Adresse <span class="required-badge">*</span>
+            </label>
+            <input type="email" id="f-email" name="email"
+                   placeholder="deine@email.de" autocomplete="off" />
+            <span class="hint">Pflichtfeld &ndash; oder Telefonnummer angeben</span>
+          </div>
+
+          <div class="or-divider">oder</div>
+
+          <div class="form-group">
+            <label for="f-phone">
+              Telefonnummer <span class="required-badge">*</span>
+            </label>
+            <input type="tel" id="f-phone" name="phone"
+                   placeholder="+41 79 000 00 00" autocomplete="off" />
+            <span class="hint">Pflichtfeld &ndash; oder E-Mail-Adresse angeben</span>
+          </div>
+
+          <div id="form-error" class="error-msg">
+            Bitte gib entweder eine E-Mail-Adresse oder eine Telefonnummer an.
+          </div>
+
+          <button type="submit" class="btn-submit">&#127881; Jetzt teilnehmen!</button>
+        </form>
+      </div>
+
+      <div class="perks" lang="en">
+        <div class="perk">
+          <div class="perk-icon">&#127873;</div>
+          <div class="perk-label">Amazing</div>
+          <div class="perk-sub">Prizes!</div>
+        </div>
+        <div class="perk">
+          <div class="perk-icon">&#9889;</div>
+          <div class="perk-label">Easy to</div>
+          <div class="perk-sub">Enter!</div>
+        </div>
+        <div class="perk">
+          <div class="perk-icon">&#127942;</div>
+          <div class="perk-label">Win Big!</div>
+          <div class="perk-sub">Don't miss out!</div>
+        </div>
+      </div>
+
+    </div>
+
+    <script>
+      document.getElementById('giveaway-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const email = document.getElementById('f-email').value.trim();
+        const phone = document.getElementById('f-phone').value.trim();
+        const errorEl = document.getElementById('form-error');
+
+        if (!email && !phone) {
+          errorEl.style.display = 'block';
+          return;
+        }
+
+        errorEl.style.display = 'none';
+        // Data is intentionally NOT sent or stored anywhere.
+        window.location.href = 'awareness.html';
+      });
+    </script>
+
   </body>
 </html>
