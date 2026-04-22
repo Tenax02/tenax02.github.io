@@ -1,58 +1,138 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Phishing Awareness Check</title>
-    <style>
-      :root {
-        color-scheme: light dark;
-      }
+<head>
+<meta charset="UTF-8">
+<title>Giveaway Registration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-      body {
+<style>
+    body {
         margin: 0;
-        min-height: 100vh;
-        display: grid;
-        place-items: center;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        background: #0b1020;
-        color: #f7f9ff;
-      }
+        font-family: Arial, sans-serif;
+        background: radial-gradient(circle at top, #2b0057, #000);
+        color: white;
+        text-align: center;
+    }
 
-      main {
-        max-width: 740px;
-        margin: 24px;
-        padding: 32px;
-        border-radius: 12px;
-        background: rgba(255, 255, 255, 0.08);
-        border: 1px solid rgba(255, 255, 255, 0.25);
-        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
-      }
+    .container {
+        max-width: 500px;
+        margin: 40px auto;
+        padding: 20px;
+        border-radius: 20px;
+        background: linear-gradient(135deg, #ff00cc, #3333ff);
+        box-shadow: 0 0 30px rgba(255,255,255,0.3);
+    }
 
-      h1 {
+    h1 {
+        font-size: 3em;
+        color: gold;
+        text-shadow: 0 0 15px orange;
+        margin-bottom: 5px;
+    }
+
+    h2 {
         margin-top: 0;
-        color: #ff7070;
-      }
+        font-weight: normal;
+        color: #fff;
+    }
 
-      p {
-        line-height: 1.5;
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <h1>⚠️ Du hast einen Phishing QR-Code gescannt ⚠️</h1>
-      <p>
-        Diese Seite ist Teil einer Übung zur Sensibilisierung für Cybersicherheit. In der Realität kann das Scannen unbekannter
-        QR-Codes zu Phishing-Seiten, zu dem Herunterladen von Malware und dem Diebstahl von Zugangsdaten führen.
-      </p>
-      <p>
-        Überprüfe stets, von wem der Code stammt, schau dir die Ziel-URL genau an und gib keine
-        persönlichen Daten ein, es sei denn, du vertraust der Quelle.
-      </p>
-      <script>
-        fetch('https://api.counterapi.dev/v2/tobias-leus-team-3759/TecDay/up');
-      </script>
-    </main>
-  </body>
+    form {
+        margin-top: 20px;
+        text-align: left;
+    }
+
+    label {
+        display: block;
+        margin-top: 12px;
+        font-weight: bold;
+    }
+
+    input, select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 8px;
+        border: none;
+        margin-top: 5px;
+    }
+
+    button {
+        margin-top: 20px;
+        width: 100%;
+        padding: 15px;
+        font-size: 1.2em;
+        background: gold;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: bold;
+        box-shadow: 0 0 15px gold;
+    }
+
+    button:hover {
+        background: orange;
+    }
+
+    .footer {
+        margin-top: 15px;
+        font-size: 0.9em;
+        opacity: 0.8;
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>GIVEAWAY!</h1>
+    <h2>You could win 🎉</h2>
+
+    <form id="giveawayForm">
+
+        <label>Name</label>
+        <input type="text" id="name" required>
+
+        <label>E-Mail *</label>
+        <input type="email" id="email">
+
+        <label>Telefonnummer *</label>
+        <input type="tel" id="phone">
+
+        <label>Alter</label>
+        <select id="age">
+            <option>Unter 18</option>
+            <option>18-24</option>
+            <option>25-34</option>
+            <option>35-44</option>
+            <option>45+</option>
+        </select>
+
+        <br><br><br>
+
+        <button type="submit">JETZT TEILNEHMEN</button>
+    </form>
+
+    <div class="footer">
+        *Telefonnummer oder E-Mail erforderlich. <br><br>
+
+        Amazing prizes • Easy to enter • Don’t miss out!
+    </div>
+</div>
+
+<script>
+document.getElementById("giveawayForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+
+    // Require either email OR phone
+    if (!email && !phone) {
+        alert("Please provide either an email address or a phone number.");
+        return;
+    }
+    document.location.href = "information.html";
+});
+</script>
+
+</body>
 </html>
